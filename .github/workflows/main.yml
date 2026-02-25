@@ -2,31 +2,31 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar código
-        uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
       - name: Instalar Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Instalar dependências
         run: npm ci
 
-      - name: Rodar Lint
+      - name: Rodar lint
         run: npm run lint
 
-      - name: Rodar Testes
-        run: npm run test --if-present
+      - name: Rodar testes
+        run: npm run test
 
-      - name: Rodar Build
+      - name: Build
         run: npm run build
